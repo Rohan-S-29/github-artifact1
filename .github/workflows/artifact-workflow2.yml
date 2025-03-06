@@ -16,6 +16,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: my-artifact
-
+          path: .
       - name: Displaying content 
         run: cat message.txt
