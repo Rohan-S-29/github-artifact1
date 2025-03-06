@@ -1,0 +1,36 @@
+name: Artifact Example workflow
+
+on:  
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  create-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create a file
+        run: echo "This is text message from Job 1" > msg.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: msg.txt
+
+  use-artifact:
+    needs: create-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-artifact
+
+      - name: Reading the file from job 1
+        run: cat msg.txt
