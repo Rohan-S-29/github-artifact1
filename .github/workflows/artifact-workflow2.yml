@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: ["Artifact Example workflow"]
     types:
-      - completed
+      - in_progress
 
 jobs:
   consume-artifact:
